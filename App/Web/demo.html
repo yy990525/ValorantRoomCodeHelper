@@ -1,0 +1,25 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>本地试用 · 抢码助手</title>
+<style>body{margin:0;background:#0d141f;color:#eff5ff;font:16px 'Microsoft YaHei UI',sans-serif}header{padding:22px;background:#172332}main{display:flex;gap:20px;padding:22px}video{width:74%;background:#080e18}aside{flex:1;padding:20px;background:#1c2a3c}button{background:#ff4c5c;color:white;border:0;border-radius:6px;padding:10px 20px;font-size:16px;cursor:pointer}.note{padding:0 24px;color:#93a9c0}</style>
+<header>本地动态视频试用 <span style="color:#55e9a7">· 不连接抖音 · 不是真实房间码</span></header>
+<main><video id="video" autoplay muted playsinline></video><aside><h3>模拟聊天栏</h3><p>开始识别后，此栏和网页装饰会隐藏。</p><button onclick="change()">更换演示码</button><p id="chat">演示房间码：ABC123</p></aside></main>
+<p class="note">操作：播放后直接开始识别，无需框选；开始不会自动全屏。每 18 秒自动更换演示码；试用期间也会按“自动复制”设置写入剪贴板。</p>
+<script>
+const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=720;
+const ctx=canvas.getContext('2d');const codes=['ABC123','QWE456','RTY789'];let index=0;
+window.change=()=>{index=(index+1)%codes.length;document.getElementById('chat').textContent='演示房间码：'+codes[index];};
+window.setDemoCode=(code)=>{codes[index]=code;document.getElementById('chat').textContent='演示房间码：'+code;};
+function draw(t){
+ let g=ctx.createLinearGradient(0,0,1280,720);g.addColorStop(0,'#152333');g.addColorStop(1,'#08101c');ctx.fillStyle=g;ctx.fillRect(0,0,1280,720);
+ ctx.strokeStyle='#273d52';ctx.lineWidth=1;for(let x=0;x<1280;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,720);ctx.stroke();}for(let y=0;y<720;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1280,y);ctx.stroke();}
+ ctx.fillStyle='#20374a';ctx.fillRect(160,300,250,280);ctx.fillStyle='#294256';ctx.fillRect(830,200,260,380);ctx.fillStyle='#304b5b';ctx.fillRect(470,350,260,230);
+ ctx.fillStyle='#141d2c';ctx.fillRect(56,52,420,125);ctx.strokeStyle='#3d655d';ctx.strokeRect(56,52,420,125);
+ ctx.fillStyle='#9fb4c8';ctx.font='20px sans-serif';ctx.fillText('ROOM CODE / 本地演示',78,87);
+ ctx.fillStyle='#ffffff';ctx.font='bold 64px Consolas, monospace';ctx.fillText(codes[index],78,151);
+ ctx.fillStyle='#4ae6a1';ctx.beginPath();ctx.arc(1110+Math.sin(t/600)*18,94,8,0,2*Math.PI);ctx.fill();
+ ctx.strokeStyle='#b7d1df';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(630,360);ctx.lineTo(650,360);ctx.moveTo(640,350);ctx.lineTo(640,370);ctx.stroke();
+ ctx.fillStyle='#4b6475';ctx.fillRect(900,535,140,38);ctx.save();ctx.translate(930,650);ctx.rotate(-.4);ctx.fillStyle='#142333';ctx.fillRect(-35,-90,80,230);ctx.fillRect(-10,-175,35,120);ctx.restore();
+ ctx.fillStyle='#8fa9c0';ctx.font='24px sans-serif';ctx.fillText('演示视频 · 用于验证框选、OCR 与自动复制',55,669);
+ requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);const v=document.getElementById('video');v.srcObject=canvas.captureStream(30);v.play().catch(()=>{});setInterval(change,18000);
+</script></html>

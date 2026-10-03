@@ -1,0 +1,17 @@
+<Window x:Class="ValorantHelper.SettingsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="{DynamicResource Bg}" Foreground="{DynamicResource Text}" FontFamily="Microsoft YaHei UI" Style="{StaticResource ChromeWindow}" Icon="Assets/app.ico" Title="抢码助手 · 设置" Width="540" Height="700" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+  <Grid Margin="24"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <StackPanel Margin="0,0,0,18"><TextBlock Text="识别与快捷键" FontSize="22" FontWeight="Bold"/><TextBlock Text="设置保存后生效，识别保持暂停。" Style="{StaticResource Label}" Margin="0,8,0,0"/></StackPanel>
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="0,0,8,0"><StackPanel>
+      <TextBlock Text="采样间隔（毫秒，150–3000）" Margin="0,0,0,6"/><TextBox x:Name="IntervalBox" Margin="0,0,0,15"/>
+      <TextBlock Text="最低识别得分（50–99，默认 85）" Margin="0,0,0,6"/><TextBox x:Name="ConfidenceBox" Margin="0,0,0,15"/>
+      <TextBlock Text="重复码冷却时间（秒，0–3600）" Margin="0,0,0,6"/><TextBox x:Name="CooldownBox" Margin="0,0,0,15"/>
+      <TextBlock Text="历史记录数量（10–500）" Margin="0,0,0,6"/><TextBox x:Name="LimitBox" Margin="0,0,0,15"/>
+      <Grid Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="20"/><ColumnDefinition/></Grid.ColumnDefinitions><StackPanel><TextBlock Text="开始 / 暂停" Margin="0,0,0,6"/><ComboBox x:Name="ToggleKeyBox"/></StackPanel><StackPanel Grid.Column="2"><TextBlock Text="复制最新码" Margin="0,0,0,6"/><ComboBox x:Name="CopyKeyBox"/></StackPanel></Grid>
+      <CheckBox x:Name="TrayCheck" Content="最小化到系统托盘"/>
+      <TextBlock Text="窗口隐藏或最小化时暂缓截图，恢复窗口后继续。" Style="{StaticResource Label}" TextWrapping="Wrap" Margin="0,0,0,14"/>
+      <Button Content="导出诊断日志" Click="ExportLog_Click" HorizontalAlignment="Left"/>
+      <TextBlock x:Name="ErrorLabel" Foreground="{DynamicResource Accent}" TextWrapping="Wrap" Margin="0,12,0,0"/>
+    </StackPanel></ScrollViewer>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0"><Button Content="取消" IsCancel="True" Margin="0,0,10,0"/><Button Content="保存设置" Style="{StaticResource Primary}" Click="Save_Click" IsDefault="True"/></StackPanel>
+  </Grid>
+</Window>

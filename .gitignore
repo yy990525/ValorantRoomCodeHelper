@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+**/Data/
+**/TestData/
+**/LiveCheckData/
+**/BrowserData/
+publish/
+build-cache/
+.vs/
+*.user
+*.suo
